@@ -1,0 +1,157 @@
+snehasameerrajguru@Sneha MINGW64 /s/Coding Dojo/Python/Python Django/users_project (master)
+$ python manage.py makemigrations
+Migrations for 'dojoninjas_app':
+  apps\dojoninjas_app\migrations\0001_initial.py
+    - Create model Dojo
+    - Create model Ninja
+(djangoIntroEnv)
+snehasameerrajguru@Sneha MINGW64 /s/Coding Dojo/Python/Python Django/users_project (master)
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojoninjas_app, sessions, users_app
+Running migrations:
+  Applying dojoninjas_app.0001_initial... OK
+(djangoIntroEnv)
+snehasameerrajguru@Sneha MINGW64 /s/Coding Dojo/Python/Python Django/users_project (master)
+$ python manage.py shell
+Python 2.7.13 (v2.7.13:a06454b1afa1, Dec 17 2016, 20:53:40) [MSC v.1500 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.dojoninjas_app.models import *
+>>> Dojo.objects.all()
+<QuerySet []>
+>>> Ninja.objects.all()
+<QuerySet []>
+>>> Dojo.objects.__repr__()
+
+KeyboardInterrupt
+>>> Dojo.objects.__repr__
+<method-wrapper '__repr__' of Manager object at 0x0000000003FD7860>
+>>> Dojo.objects.create(name="CodingDojo Silicon Valley",city="Mountain View",state="CA")
+<Blog object: CodingDojo Silicon Valley Mountain View CA>
+>>> Dojo.objects.create(name="CodingDojo Seattle",city="Seattle",state="WA")
+<Blog object: CodingDojo Seattle Seattle WA>
+>>> Dojo.objects.create(name="CodingDojo New York",city="New York",state="NY")
+<Blog object: CodingDojo New York New York NY>
+>>> Dojo.objects.all()
+<QuerySet [<Blog object: CodingDojo Silicon Valley Mountain View CA>, <Blog object: CodingDojo Seattle Seattle WA>, <Blog object: CodingDojo New York New York NY>]>
+>>> Dojo.objects.first().ninjas.all()
+<QuerySet []>
+>>> Dojo.objects.delete()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Manager' object has no attribute 'delete'
+>>> Dojo.objects.get(id=1).delete()
+(1, {u'dojoninjas_app.Ninja': 0, u'dojoninjas_app.Dojo': 1})
+>>> Dojo.objects.get(id=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "S:\Coding Dojo\Python\Python Environments\djangoIntroEnv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "S:\Coding Dojo\Python\Python Environments\djangoIntroEnv\lib\site-packages\django\db\models\query.py", line 380, in get
+    self.model._meta.object_name
+DoesNotExist: Dojo matching query does not exist.
+>>> Dojo.objects.get(id=).delete()
+  File "<console>", line 1
+    Dojo.objects.get(id=).delete()
+                        ^
+SyntaxError: invalid syntax
+>>> Dojo.objects.get(id=2).delete()
+(1, {u'dojoninjas_app.Ninja': 0, u'dojoninjas_app.Dojo': 1})
+>>> Dojo.objects.get(id=3).delete()
+(1, {u'dojoninjas_app.Ninja': 0, u'dojoninjas_app.Dojo': 1})
+>>> Dojo.objects.all()
+<QuerySet []>
+>>> Dojo.objects.create(name="CodingDojo Silicon Valley",city="Mountain View",state="CA")
+<Blog object: CodingDojo Silicon Valley Mountain View CA>
+>>> Dojo.objects.create(name="CodingDojo Seattle",city="Seattle",state="WA")
+<Blog object: CodingDojo Seattle Seattle WA>
+>>> Dojo.objects.create(name="CodingDojo New York",city="New York",state="NY")
+<Blog object: CodingDojo New York New York NY>
+>>> Ninja.objects.all()
+<QuerySet []>
+>>> Dojo.objects.all()
+<QuerySet [<Blog object: CodingDojo Silicon Valley Mountain View CA>, <Blog object: CodingDojo Seattle Seattle WA>, <Blog object: CodingDojo New York New York NY>]>
+>>> Ninja.objects.create(first_name="sneha",last_name="sawant",dojo=Dojo.objects.get(id=1))
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "S:\Coding Dojo\Python\Python Environments\djangoIntroEnv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "S:\Coding Dojo\Python\Python Environments\djangoIntroEnv\lib\site-packages\django\db\models\query.py", line 380, in get
+    self.model._meta.object_name
+DoesNotExist: Dojo matching query does not exist.
+>>> Ninja.objects.create(first_name="sneha",last_name="sawant",dojo=Dojo.objects.get(id=1))
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "S:\Coding Dojo\Python\Python Environments\djangoIntroEnv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "S:\Coding Dojo\Python\Python Environments\djangoIntroEnv\lib\site-packages\django\db\models\query.py", line 380, in get
+    self.model._meta.object_name
+DoesNotExist: Dojo matching query does not exist.
+>>> Dojo.objects.get(id=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "S:\Coding Dojo\Python\Python Environments\djangoIntroEnv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "S:\Coding Dojo\Python\Python Environments\djangoIntroEnv\lib\site-packages\django\db\models\query.py", line 380, in get
+    self.model._meta.object_name
+DoesNotExist: Dojo matching query does not exist.
+>>> Dojo.objects.all()
+<QuerySet [<Blog object: CodingDojo Silicon Valley Mountain View CA>, <Blog object: CodingDojo Seattle Seattle WA>, <Blog object: CodingDojo New York New York NY>]>
+>>> Dojo.objects.values()
+<QuerySet [{'city': u'Mountain View', 'state': u'CA', u'id': 4, 'name': u'CodingDojo Silicon Valley'}, {'city': u'Seattle', 'state': u'WA', u'id': 5, 'name': u'CodingDojo Seattle'}, {'city': u'New York',
+
+ 'state': u'NY', u'id': 6, 'name': u'CodingDojo New York'}]>
+>>> Ninja.objects.create(first_name="sneha",last_name="sawant",dojo=Dojo.objects.get(id=4))
+<Blog object: sneha sawant>
+>>> Ninja.objects.create(first_name="sameer",last_name="rajguru",dojo=Dojo.objects.get(id=4))
+
+KeyboardInterrupt
+>>> Ninja.objects.create(first_name="sameer",last_name="rajguru",dojo=Dojo.objects.get(id=4))
+<Blog object: sameer rajguru>
+>>> Ninja.objects.create(first_name="veera",last_name="prakash",dojo=Dojo.objects.get(id=4))
+<Blog object: veera prak
+>>> Dojo.objects.first().ninjas.all()
+<QuerySet [<Blog object: sneha sawant>, <Blog object: sameer rajguru>, <Blog object: veera prakash>]>
+>>> Ninja.objects.first().dojo
+<Blog object: CodingDojo Silicon Valley Mountain View CA>
+>>> Ninja.objects.create(first_name="abc",last_name="abc",dojo=Dojo.objects.get(id=5))
+<Blog object: abc abc>
+>>> Ninja.objects.create(first_name="mnp",last_name="mnp",dojo=Dojo.objects.get(id=5))
+<Blog object: mnp mnp>
+>>> Ninja.objects.create(first_name="xyz",last_name="xyz",dojo=Dojo.objects.get(id=5))
+<Blog object: xyz xyz>
+>>> Ninja.objects.create(first_name="111",last_name="111",dojo=Dojo.objects.get(id=6))
+<Blog object: 111 111>
+>>> Ninja.objects.create(first_name="222",last_name="222",dojo=Dojo.objects.get(id=6))
+<Blog object: 222 222>
+>>> Ninja.objects.create(first_name="333",last_name="333",dojo=Dojo.objects.get(id=6))
+<Blog object: 333 333>
+>>> Dojo.objects.get(id=4).ninjas.all()
+<QuerySet [<Blog object: sneha sawant>, <Blog object: sameer rajguru>, <Blog object: veera prakash>]>
+>>> Dojo.objects.get(id=5).ninjas.all()
+<QuerySet [<Blog object: abc abc>, <Blog object: mnp mnp>, <Blog object: xyz xyz>]>
+>>> Dojo.objects.get(id=6).ninjas.all()
+<QuerySet [<Blog object: 111 111>, <Blog object: 222 222>, <Blog object: 333 333>]>
+>>> ninja.objects.last().dojo
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'ninja' is not defined
+>>> Ninja.objects.last().dojo
+<Blog object: CodingDojo New York New York NY>
+>>> ninjas.objects.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'ninjas' is not defined
+>>> Ninja.objects.all()
+<QuerySet [<Blog object: sneha sawant>, <Blog object: sameer rajguru>, <Blog object: veera prakash>, <Blog object: abc abc>, <Blog object: mnp mnp>, <Blog object: xyz xyz>, <Blog object: 111 111>, <Blog
+object: 222 222>, <Blog object: 333 333>]>
+>>> Ninja.objects.all().values()
+<QuerySet [{u'dojo_id': 4, 'first_name': u'sneha', 'last_name': u'sawant', u'id': 1}, {u'dojo_id': 4, 'first_name': u'sameer', 'last_name': u'rajguru', u'id': 2}, {u'dojo_id': 4, 'first_name': u'veera',
+'last_name': u'prakash', u'id': 3}, {u'dojo_id': 5, 'first_name': u'abc', 'last_name': u'abc', u'id': 4}, {u'dojo_id': 5, 'first_name': u'mnp', 'last_name': u'mnp', u'id': 5}, {u'dojo_id': 5, 'first_name
+
+': u'xyz', 'last_name': u'xyz', u'id': 6}, {u'dojo_id': 6, 'first_name': u'111', 'last_name': u'111', u'id': 7}, {u'dojo_id': 6, 'first_name': u'222', 'last_name': u'222', u'id': 8}, {u'dojo_id': 6, 'fir
+
+st_name': u'333', 'last_name': u'333', u'id': 9}]>
+
+Dojo.objects.all()
